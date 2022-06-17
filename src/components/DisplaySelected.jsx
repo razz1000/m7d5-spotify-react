@@ -1,17 +1,17 @@
-import { Card, Button, Figure, Container, Row, Col } from "react-bootstrap";
-import { connect } from "react-redux";
+import { Figure, Container, Row, Col } from 'react-bootstrap'
+import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
-  song: state.selected.song,
-});
+  // song: state.selected.song
+})
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = () => ({})
 
 const DisplaySelected = ({ song }) => {
   return (
     <div>
-      {console.log("SONG:", song)}
-      <Container style={{ color: "red" }}>
+      {console.log('SONG:', song[0])}
+      <Container style={{ color: 'red' }}>
         <Row>
           <Col>
             <Figure>
@@ -25,18 +25,18 @@ const DisplaySelected = ({ song }) => {
             </Figure>
           </Col>
           <Col>
-            {/*             <Row>{<p>{song.title}</p>}</Row>
-            <Row>{<p>{song.artist.name}</p>}</Row> */}
+            <Row>{<p>{song.title}</p>}</Row>
+            <Row>{<p>{song.artist.name}</p>}</Row>
           </Col>
           <Col>
             <Row>
-              <i class="bi bi-heart"></i>
+              <i className="bi bi-heart"></i>
             </Row>
           </Col>
         </Row>
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplaySelected);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplaySelected)

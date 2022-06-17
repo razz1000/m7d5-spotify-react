@@ -1,41 +1,41 @@
-import React from "react";
-import Song from "./Song";
-import { Row } from "react-bootstrap";
+import React from 'react'
+import Song from './Song'
+import { Row } from 'react-bootstrap'
 
 class Album extends React.Component {
   state = {
     album: {},
-    songs: [],
-  };
+    songs: []
+  }
 
   componentDidMount = async () => {
-    let albumId = this.props.match.params.id;
+    let albumId = this.props.match.params.id
 
     let headers = new Headers({
-      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      "X-RapidAPI-Key": "222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20",
-    });
+      'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
+      'X-RapidAPI-Key': '222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20'
+    })
 
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId,
+        'https://striveschool-api.herokuapp.com/api/deezer/album/' + albumId,
         {
-          method: "GET",
-          headers,
+          method: 'GET',
+          headers
         }
-      );
+      )
 
       if (response.ok) {
-        let album = await response.json();
+        let album = await response.json()
         this.setState({
           album,
-          songs: album.tracks.data,
-        });
+          songs: album.tracks.data
+        })
       }
     } catch (exception) {
-      console.log(exception);
+      console.log(exception)
     }
-  };
+  }
 
   render() {
     return (
@@ -62,7 +62,7 @@ class Album extends React.Component {
               </div>
               <div className="text-center">
                 <p className="artist-name">
-                  {this.state.album.artist ? this.state.album.artist.name : ""}
+                  {this.state.album.artist ? this.state.album.artist.name : ''}
                 </p>
               </div>
               <div className="mt-4 text-center">
@@ -75,16 +75,16 @@ class Album extends React.Component {
           <div className="col-md-8 p-5">
             <Row>
               <div className="col-md-10 mb-5" id="trackList">
-                {this.state.songs.map((song) => (
-                  <Song track={song} key={song.id} />
+                {this.state.songs.map((song, index) => (
+                  <Song track={song} key={song.id} index={index} />
                 ))}
               </div>
             </Row>
           </div>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-export default Album;
+export default Album

@@ -1,13 +1,29 @@
-import React from "react";
-import { Row } from "react-bootstrap";
-import DisplaySelected from "./DisplaySelected";
+import React from 'react'
+import { Row } from 'react-bootstrap'
+import DisplaySelected from './DisplaySelected'
+import { connect } from 'react-redux'
 
-const Player = () => (
+const mapStateToProps = (state) => ({
+  songSelected: state.selected.song
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+
+const Player = ({ songSelected }) => (
   <div className="container-fluid fixed-bottom bg-container pt-1">
     <Row>
       <div className="col-lg-10 offset-lg-2">
         <Row>
-          <DisplaySelected />
+          {console.log('songSelected- Player', songSelected)}
+          {songSelected[0] ? (
+            <DisplaySelected song={songSelected[0]} />
+          ) : (
+            console.log('Object is Empty')
+          )}
+          {/* 
+console.log(Object.keys({}).length);
+ && <DisplaySelected />} */}
+
           <div className="col-6 col-md-4 col-lg-2 offset-3 offset-md-4 offset-lg-5 playerControls mt-1">
             <Row>
               <a href="/">
@@ -46,6 +62,6 @@ const Player = () => (
       </div>
     </Row>
   </div>
-);
+)
 
-export default Player;
+export default connect(mapStateToProps, mapDispatchToProps)(Player)
