@@ -1,58 +1,57 @@
-import React from "react";
-import Song from "./Song";
-import { Row } from "react-bootstrap";
-import { connect } from "react-redux";
-import { getSongsAction } from "../redux/actions";
+import React from 'react'
+import Song from './Song'
+import { Row } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { getSongsAction } from '../redux/actions'
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  album: state.songs.list
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  getSongs: (songs) => {
-    dispatch(getSongsAction(songs));
-  },
-});
+  getSongs: (match, location) => {
+    dispatch(getSongsAction(match, location))
+  }
+})
 
 class Album extends React.Component {
   state = {
     album: {},
-    songs: [],
-  };
+    songs: []
+  }
 
-  componentDidMount = async (props) => {
-    console.log(this.props.match, "match");
-    console.log("Album", this.props.album);
-    console.log("location", this.props.location);
-    this.props.getSongs(this.props.match, this.props.location);
+  componentDidMount = async () => {
+    // console.log(this.props.match, 'match')
+    // console.log('location', this.props.location)
+    this.props.getSongs(this.props.match, this.props.location)
 
-    /*    let albumId = this.props.match.params.id;
+    let albumId = this.props.match.params.id
 
     let headers = new Headers({
-      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      "X-RapidAPI-Key": "222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20",
-    });
+      'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
+      'X-RapidAPI-Key': '222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20'
+    })
 
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId,
+        'https://striveschool-api.herokuapp.com/api/deezer/album/' + albumId,
         {
-          method: "GET",
-          headers,
+          method: 'GET',
+          headers
         }
-      );
+      )
 
       if (response.ok) {
-        let album = await response.json();
+        let album = await response.json()
         this.setState({
           album,
-          songs: album.tracks.data,
-        });
-
-
+          songs: album.tracks.data
+        })
       }
     } catch (exception) {
-      console.log(exception);
-    } */
-  };
+      console.log(exception)
+    }
+  }
 
   render() {
     return (
@@ -79,7 +78,7 @@ class Album extends React.Component {
               </div>
               <div className="text-center">
                 <p className="artist-name">
-                  {this.state.album.artist ? this.state.album.artist.name : ""}
+                  {this.state.album.artist ? this.state.album.artist.name : ''}
                 </p>
               </div>
               <div className="mt-4 text-center">
@@ -100,8 +99,8 @@ class Album extends React.Component {
           </div>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Album);
+export default connect(mapStateToProps, mapDispatchToProps)(Album)
