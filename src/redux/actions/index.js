@@ -29,8 +29,6 @@ export const addToLikedSongsAction = (song) => {
 
 export const removeFromLikedSongsAction = (id) => {
   return (dispatch) => {
-    console.log("removing song from like songs");
-
     dispatch({
       type: REMOVE_FROM_LIKED_SONGS,
       payload: id,
@@ -38,12 +36,36 @@ export const removeFromLikedSongsAction = (id) => {
   };
 };
 
-export const getSongsAction = (songs) => {
-  return (dispatch, getState) => {
+export const getSongsAction = ({ match }) => {
+  return async (dispatch, getState) => {
+    console.log("MATCH2", match);
+
     console.log("adding songs :", getState());
-    dispatch({
-      type: ADD_API_CALL_SONGS_TO_GLOBAL_STATE,
-      payload: songs,
+    let albumId = props.match.params.id;
+
+    let headers = new Headers({
+      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+      "X-RapidAPI-Key": "222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20",
     });
+
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId,
+        {
+          method: "GET",
+          headers,
+        }
+      );
+
+      if (response.ok) {
+        let album = await response.json();
+        dispatch({
+          type: ADD_API_CALL_SONGS_TO_GLOBAL_STATE,
+          payload: album,
+        });
+      }
+    } catch (exception) {
+      console.log(exception);
+    }
   };
 };

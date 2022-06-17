@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   addSongToSelectedAction,
@@ -46,7 +45,6 @@ const Song = ({
         <span className="d-flex justify-content-end">
           {likesList.find((song, index) => song.id === track.id) ? (
             <span>
-              {console.log("remove like")}
               <i
                 className="bi bi-heart-fill"
                 onClick={() => removeFromLikesSongs(track.id)}
@@ -54,7 +52,6 @@ const Song = ({
             </span>
           ) : (
             <span>
-              {console.log("add like")}
               <i
                 className="bi bi-heart"
                 onClick={() => addToLikedSongs(track)}

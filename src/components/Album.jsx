@@ -18,8 +18,13 @@ class Album extends React.Component {
     songs: [],
   };
 
-  componentDidMount = async () => {
-    let albumId = this.props.match.params.id;
+  componentDidMount = async (props) => {
+    console.log(this.props.match, "match");
+    console.log("Album", this.props.album);
+    console.log("location", this.props.location);
+    this.props.getSongs(this.props.match, this.props.location);
+
+    /*    let albumId = this.props.match.params.id;
 
     let headers = new Headers({
       "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
@@ -41,10 +46,12 @@ class Album extends React.Component {
           album,
           songs: album.tracks.data,
         });
+
+
       }
     } catch (exception) {
       console.log(exception);
-    }
+    } */
   };
 
   render() {

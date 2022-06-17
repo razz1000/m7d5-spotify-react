@@ -1,8 +1,4 @@
-import {
-  ADD_SONG_TO_SELECTED,
-  ADD_TO_LIKED_SONGS,
-  REMOVE_FROM_LIKED_SONGS,
-} from "../actions";
+import { ADD_TO_LIKED_SONGS, REMOVE_FROM_LIKED_SONGS } from "../actions";
 
 const initialState = {
   heart: [],
@@ -11,7 +7,6 @@ const initialState = {
 const likeReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_LIKED_SONGS:
-      console.log("HELOO", action.payload);
       return {
         heart: [...state.heart, action.payload],
       };
