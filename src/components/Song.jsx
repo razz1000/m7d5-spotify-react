@@ -1,8 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addSongToSelectedAction } from "../redux/actions";
 
-const Song = ({ track }) => (
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  addSongToSelected: (songSelected) => {
+    dispatch(addSongToSelectedAction(songSelected));
+  },
+});
+
+const Song = ({ track, addSongToSelected }) => (
   <div className="py-3 trackHover">
-    <span className="card-title trackHover px-3" style={{ color: "white" }}>
+    <span
+      className="card-title trackHover px-3"
+      style={{ color: "white" }}
+      onClick={() => {
+        addSongToSelected(track);
+      }}
+    >
       {track.title}
     </span>
     <small className="duration" style={{ color: "white" }}>
@@ -14,4 +30,4 @@ const Song = ({ track }) => (
   </div>
 );
 
-export default Song;
+export default connect(mapStateToProps, mapDispatchToProps)(Song);

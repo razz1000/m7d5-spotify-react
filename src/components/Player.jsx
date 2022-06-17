@@ -1,16 +1,19 @@
 import React from "react";
 import { Row } from "react-bootstrap";
+import DisplaySelected from "./DisplaySelected";
 
 const Player = () => (
   <div className="container-fluid fixed-bottom bg-container pt-1">
     <Row>
       <div className="col-lg-10 offset-lg-2">
         <Row>
+          <DisplaySelected />
           <div className="col-6 col-md-4 col-lg-2 offset-3 offset-md-4 offset-lg-5 playerControls mt-1">
             <Row>
               <a href="/">
                 <img src="/playerbuttons/Shuffle.png" alt="shuffle" />
               </a>
+
               <a href="/">
                 <img src="/playerbuttons/Previous.png" alt="shuffle" />
               </a>
@@ -26,6 +29,7 @@ const Player = () => (
             </Row>
           </div>
         </Row>
+
         <Row className="justify-content-center playBar py-3">
           <div className="col-8 col-md-6">
             <div id="progress">
